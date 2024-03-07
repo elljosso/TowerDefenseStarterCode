@@ -54,6 +54,14 @@ public class UFO : MonoBehaviour
         }
 
     }
+    public void SetPath(Path newPath)
+    {
+        path = newPath;
+    }
+    public void SetTarget(GameObject newTarget)
+    {
+        target = newTarget;
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -18,8 +18,13 @@ public class EnemySpawner : MonoBehaviour
 
         var script = newEnemy.GetComponentInParent<UFO>();
 
-
-
+        if (script != null)
+        {
+            // Stel het pad en het doel van de vijand in
+            script.SetPath(path);
+            GameObject target = RequestTarget(path, 0); // Begin bij het eerste waypoint
+            script.SetTarget(target);
+        }
 
     }
     public void SpawnTester()
