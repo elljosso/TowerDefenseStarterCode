@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionSite : MonoBehaviour
+public class ConstructionSite
 {
     public Vector3Int TilePosition { get; private set; }
     public Vector3 WorldPosition { get; private set; }
