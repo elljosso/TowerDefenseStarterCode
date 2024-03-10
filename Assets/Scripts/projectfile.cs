@@ -11,9 +11,9 @@ public class Projectile : MonoBehaviour
         // Draai het projectiel naar het doelwit
         if (target != null)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x, lookRotation.eulerAngles.y, 0f);
+            Vector2 direction = (target.position - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
@@ -27,12 +27,11 @@ public class Projectile : MonoBehaviour
         }
 
         // Verplaats het projectiel naar het doelwit
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         // Controleer of de afstand tussen dit object en het doelwit kleiner is dan 0.2.
         // Zo ja, vernietig dit object.
-        if (Vector3.Distance(transform.position, target.position) < 0.2f)
+        if (Vector2.Distance(transform.position, target.position) < 0.2f)
         {
             Destroy(gameObject);
         }

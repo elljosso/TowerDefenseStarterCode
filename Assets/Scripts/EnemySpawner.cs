@@ -77,6 +77,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Get = this;
             DontDestroyOnLoad(gameObject);
-        }
+        }   
     }
 }

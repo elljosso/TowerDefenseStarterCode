@@ -185,6 +185,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 289530842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &50136524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2083514882989287725, guid: eec38c496b59fe74e9ee6d5dfad9bc26, type: 3}
+  m_PrefabInstance: {fileID: 325600145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &50136528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50136524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eee455642cd0c04f9bcf3901fe9b2d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 3
+  attackRate: 1
+  attackDamage: 1
+  attackSize: 1
+  projectileSpeed: 1
+  bulletPrefab: {fileID: 8143762631001060055, guid: eb49331ec6178fd429a939f3be8a57e2, type: 3}
+  type: 0
 --- !u!1 &179142722
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,10 +464,14 @@ PrefabInstance:
       propertyPath: projectileSpeed
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6249759005529910055, guid: eec38c496b59fe74e9ee6d5dfad9bc26, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2083514882989287725, guid: eec38c496b59fe74e9ee6d5dfad9bc26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 50136528}
   m_SourcePrefab: {fileID: 100100000, guid: eec38c496b59fe74e9ee6d5dfad9bc26, type: 3}
 --- !u!1 &510267878
 GameObject:
