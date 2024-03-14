@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ConstructionSite
@@ -11,34 +9,35 @@ public class ConstructionSite
 
     private GameObject tower;
 
-    public ConstructionSite(Vector3Int tilePosition, Vector3 worldPosition, SiteLevel level, TowerType towerType)
+    public enum SiteLevel
     {
-        TilePosition = tilePosition;
-        WorldPosition = worldPosition;
-        Level = level;
-        TowerType = towerType;
+        Onbebouwd,
+        Level1,
+        Level2,
+        Level3
     }
+
     public ConstructionSite(Vector3Int tilePosition, Vector3 worldPosition)
     {
         // Wijs de tilePosition en worldPosition toe
         TilePosition = tilePosition;
-        WorldPosition = worldPosition + Vector3.up * 0.5f; // Pas de y-waarde aan
-
+        WorldPosition = new Vector3(worldPosition.x, worldPosition.y + 0.5f, worldPosition.z); // Pas de y-waarde aan
         // Stel tower gelijk aan null
         tower = null;
     }
-    public void SetTower(GameObject newTower, SiteLevel newLevel, TowerType newType)
+
+    public void SetTower(GameObject tower, SiteLevel level, TowerType type)
     {
-        // Controleer of de huidige tower verschillend is van null
-        if (tower != null)
+        // Voordat je de tower toewijst, controleer of de huidige tower verschillend is van null
+        if (this.tower != null)
         {
-            // Als dat zo is, verwijder het bestaande gameobject
-            GameObject.Destroy(tower);
+            // Als dat zo is, vernietig het huidige gameobject
+            GameObject.Destroy(this.tower);
         }
 
         // Wijs de nieuwe tower, level en type toe
-        tower = newTower;
-        Level = newLevel;
-        TowerType = newType;
+        this.tower = tower;
+        Level = level;
+        TowerType = type;
     }
 }
