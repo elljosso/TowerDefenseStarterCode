@@ -5,66 +5,54 @@ using UnityEngine;
 public class UFO : MonoBehaviour
 {
     public float speed = 1f;
-
     public float health = 10f;
-
     public int points = 1;
     public Path path { get; set; }
-
     public GameObject target { get; set; }
-
     private int pathIndex = 1;
 
     void Update()
-
     {
-
         float step = speed * Time.deltaTime;
-
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
 
-
-
-        // check how close we are to the target 
-
+        // Controleer hoe dichtbij we bij het doel zijn
         if (Vector2.Distance(transform.position, target.transform.position) < 0.1f)
-
         {
-
-            // if close, request a new waypoint 
-
+            // Als we dichtbij zijn, vraag om een nieuw waypoint
             target = EnemySpawner.Get.RequestTarget(path, pathIndex);
-
             pathIndex++;
 
-
-
-            // if target is null, we have reached the end of the path. 
-
-            // Destroy the enemy at this point 
-
+            // Als het doel null is, hebben we het einde van het pad bereikt.
+            // Vernietig de vijand op dit punt
             if (target == null)
-
             {
-
                 Destroy(gameObject);
-
             }
-
         }
-
     }
+
     public void SetPath(Path newPath)
     {
         path = newPath;
     }
+
     public void SetTarget(GameObject newTarget)
     {
         target = newTarget;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    public void Damage(int damage)
     {
-        
+        // Verminder de gezondheidswaarde
+        health -= damage;
+
+        // Als de gezondheid kleiner of gelijk is aan nul
+        // Vernietig het gameobject
+        if (health <= 0)
+        {
+            // Voeg hier eventueel punten toe aan de speler of iets anders
+            Destroy(gameObject);
+        }
     }
 }

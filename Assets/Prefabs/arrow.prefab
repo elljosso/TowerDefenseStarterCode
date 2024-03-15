@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 6792628363410759508, guid: 66e29c4489ee9fa4d8e11770c203b8e7, type: 3}
   speed: 1
-  damage: 1
+  damage: 20
