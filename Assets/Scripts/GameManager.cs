@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviour
         }
 
         // Start het spel
-        StartGame();
+        //StartGame();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         // Stel de waarden in voor credits, health en currentWave
         credits = 200;
@@ -110,13 +110,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        GameObject prefab = prefabList[(int)level];
-        if (prefab == null)
+        if (level < 0 || (int)level >= prefabList.Count)
         {
-            Debug.LogWarning("Prefab not found for the selected tower type and level!");
+            Debug.LogWarning("Invalid level for the selected tower type!");
             return;
         }
 
+        GameObject prefab = prefabList[(int)level-1];
         GameObject tower = Instantiate(prefab, selectedSite.WorldPosition, Quaternion.identity);
         selectedSite.SetTower(tower, level, type);
         towerMenu.SetSite(null); // Verberg het TowerMenu

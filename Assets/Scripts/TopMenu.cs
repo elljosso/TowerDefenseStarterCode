@@ -12,16 +12,21 @@ public class TopMenu : MonoBehaviour
     private int credits = 100;
     private int gateHealth = 100;
 
+
     void Start()
     {
         // Krijg toegang tot de root van het UI-document
         var root = GetComponent<UIDocument>().rootVisualElement;
-
+        
         // Zoek de button en labels op basis van hun naam
         startWaveButton = root.Q<Button>("startWaveButton");
+        if (startWaveButton == null) Debug.Log("startwavebutton not found");
         waveLabel = root.Q<Label>("waveLabel");
+        if (waveLabel == null) Debug.Log("wavelabel not found");
         creditsLabel = root.Q<Label>("creditsLabel");
+        if (creditsLabel == null) Debug.Log(" creditslabel not found");
         gateHealthLabel = root.Q<Label>("gateHealthLabel");
+        if (gateHealthLabel == null) Debug.Log("gatehealthlabel not found");
 
         // Koppel de functie StartWave aan de startWaveButton
         startWaveButton.clicked += StartWave;
@@ -50,6 +55,7 @@ public class TopMenu : MonoBehaviour
         UpdateUI();
 
         // Voeg hier code toe om de daadwerkelijke wave te starten
+        GameManager.Instance.StartGame();
     }
 
     // Functie om de UI bij te werken met de huidige waarden
@@ -59,7 +65,7 @@ public class TopMenu : MonoBehaviour
         waveLabel.text = "Wave: " + currentWave.ToString();
         creditsLabel.text = "Credits: " + credits.ToString();
         gateHealthLabel.text = "Gate Health: " + gateHealth.ToString();
-
+        
         // Schakel de startWaveButton uit als de gateHealth 0 of minder is
         startWaveButton.SetEnabled(gateHealth > 0);
     }
@@ -71,11 +77,12 @@ public class TopMenu : MonoBehaviour
     }
 
     // Functie om de credits label aan te passen
+
+    // Functie om de credits label aan te passen
     public void SetCreditsLabel(string text)
     {
         creditsLabel.text = text;
     }
-
     // Functie om de gate health label aan te passen
     public void SetHealthLabel(string text)
     {

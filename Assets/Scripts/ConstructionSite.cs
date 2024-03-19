@@ -4,7 +4,7 @@ public class ConstructionSite
 {
     public Vector3Int TilePosition { get; private set; }
     public Vector3 WorldPosition { get; private set; }
-    public SiteLevel Level { get; private set; }
+    public SiteLevel Level { get; private set; } = SiteLevel.Onbebouwd;
     public TowerType TowerType { get; private set; }
 
     private GameObject tower;

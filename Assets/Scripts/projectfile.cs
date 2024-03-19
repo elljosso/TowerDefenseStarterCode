@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+
         // Verplaats het projectiel naar het doelwit
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
@@ -33,6 +34,7 @@ public class Projectile : MonoBehaviour
         // Zo ja, vernietig dit object.
         if (Vector2.Distance(transform.position, target.position) < 0.2f)
         {
+            target.GetComponent<UFO>().Damage(damage);
             Destroy(gameObject);
         }
     }

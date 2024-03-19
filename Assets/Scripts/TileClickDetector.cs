@@ -40,7 +40,7 @@ public class TileClickDetector : MonoBehaviour
     void Update()
     {
         // Check for a left mouse button click 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0))  // && !EventSystem.current.IsPointerOverGameObject())
         {
             DetectTileClicked();
             if (SelectedSite != null)

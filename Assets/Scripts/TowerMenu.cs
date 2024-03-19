@@ -128,16 +128,16 @@ public class TowerMenu : MonoBehaviour
     {
         if (selectedSite != null)
         {
-            ConstructionSite.SiteLevel newLevel = selectedSite.Level + 1;
+            ConstructionSite.SiteLevel newLevel = selectedSite.Level +1;
             GameManager.Instance.Build(selectedSite.TowerType, newLevel);
         }
     }
 
     private void OnDestroyButtonClicked()
     {
-        if (selectedSite != null)
+        if (selectedSite != null && selectedSite.Level != ConstructionSite.SiteLevel.Onbebouwd)
         {
-            GameManager.Instance.Build(selectedSite.TowerType, ConstructionSite.SiteLevel.Onbebouwd);
+            selectedSite.SetTower(null, ConstructionSite.SiteLevel.Onbebouwd, TowerType.Archer); // Verwijder de toren van de bouwplaats
         }
     }
 }
