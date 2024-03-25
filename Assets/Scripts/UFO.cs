@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UFO : MonoBehaviour
@@ -24,9 +22,10 @@ public class UFO : MonoBehaviour
             pathIndex++;
 
             // Als het doel null is, hebben we het einde van het pad bereikt.
-            // Vernietig de vijand op dit punt
+            // Verminder de gezondheid van de gate en vernietig de vijand op dit punt
             if (target == null)
             {
+                GameManager.Instance.AttackGate(); // Verminder de gezondheid van de gate
                 Destroy(gameObject);
             }
         }
@@ -53,6 +52,7 @@ public class UFO : MonoBehaviour
         {
             // Voeg hier eventueel punten toe aan de speler of iets anders
             Destroy(gameObject);
+            GameManager.Instance.AddCredits(points); // Voeg credits toe wanneer de vijand wordt vernietigd
         }
     }
 }

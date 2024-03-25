@@ -137,7 +137,14 @@ public class TowerMenu : MonoBehaviour
     {
         if (selectedSite != null && selectedSite.Level != ConstructionSite.SiteLevel.Onbebouwd)
         {
-            selectedSite.SetTower(null, ConstructionSite.SiteLevel.Onbebouwd, TowerType.Archer); // Verwijder de toren van de bouwplaats
+            // Verkoopkosten ophalen
+            int sellCost = GameManager.Instance.GetCost(selectedSite.TowerType, selectedSite.Level);
+
+            // Credits toevoegen bij verkoop
+            GameManager.Instance.AddCredits(sellCost);
+
+            // Verwijder de toren van de bouwplaats
+            selectedSite.SetTower(null, ConstructionSite.SiteLevel.Onbebouwd, TowerType.Archer);
         }
     }
 }
