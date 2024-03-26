@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -109,9 +110,11 @@ public class GameManager : MonoBehaviour
         if (!waveActive && enemyInGameCounter <= 0)
         {
             // Controleer of de huidige wave gelijk is aan de laatste wave
-            if (currentWave == 1)
+            if (currentWave == 5)
             {
                 // Hier zal later de logica voor het einde van de game worden toegevoegd
+                // Laad het highscoremenu wanneer alle waves zijn voltooid
+                SceneManager.LoadScene("HighScoreScene");
             }
             else
             {
@@ -139,7 +142,10 @@ public class GameManager : MonoBehaviour
             // Controleer of de huidige wave gelijk is aan de laatste wave
             if (currentWave == 5)
             {
-                // Hier zal later de logica voor het einde van de game worden toegevoegd
+                // Winnaar
+                HighScoreManager.Instance.GameIsWon = true;
+                HighScoreManager.Instance.AddHighScore(credits); // Geef huidige credits door aan de highscore
+                SceneManager.LoadScene("HighScoreScene"); // Laad de highscore-scene
             }
             else
             {
@@ -227,6 +233,14 @@ public class GameManager : MonoBehaviour
     {
         health--;
         topMenu.SetHealthLabel("Health: " + health);
+
+        // Controleer of de speler alle levens heeft verloren
+        if (health <= 0)
+        {
+            // Verloren
+            HighScoreManager.Instance.GameIsWon = false;
+            SceneManager.LoadScene("HighScoreScene"); // Laad de highscore-scene
+        }
     }
 
     public void AddCredits(int amount)

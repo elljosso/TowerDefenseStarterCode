@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label tabindex="-1" text="Game Over" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GameOver" style="align-items: auto; align-self: center; font-size: 37px;" />
+    <ui:Label tabindex="-1" text="HighScores" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScoresNaam" style="justify-content: flex-start; align-self: center;" />
+    <ui:Label tabindex="-1" text="...&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScore" style="align-self: center;" />
+    <ui:Label tabindex="-1" text="...&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScore2" style="align-self: center;" />
+    <ui:Label tabindex="-1" text="..." parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScore3" style="align-self: center;" />
+    <ui:Label tabindex="-1" text="..." parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScore4" style="align-self: center;" />
+    <ui:Label tabindex="-1" text="..." parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighScore5" enable-rich-text="false" style="align-self: center;" />
+    <ui:Button text="Play Again" parse-escape-sequences="false" display-tooltip-when-elided="true" name="PlayAgain" />
+</ui:UXML>
