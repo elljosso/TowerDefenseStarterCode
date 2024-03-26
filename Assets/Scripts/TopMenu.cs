@@ -10,9 +10,9 @@ public class TopMenu : MonoBehaviour
 
     private int currentWave = 1;
     private int credits = 100;
-    private int gateHealth = 100;
+    private int gateHealth = 10;
     private Button startGameButton;
-
+        
     void Start()
     {
         // Krijg toegang tot de root van het UI-document
@@ -46,8 +46,8 @@ public class TopMenu : MonoBehaviour
 
         // Simuleer enkele acties die plaatsvinden tijdens een wave
         currentWave++;
-        credits += 10;
-        gateHealth -= 10;
+        credits += 25;
+        gateHealth -= 0;
 
         // Update de UI met de nieuwe waarden
         UpdateUI();

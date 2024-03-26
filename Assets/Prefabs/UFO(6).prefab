@@ -135,4 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   health: 40
-  points: 6
+  points: 18

@@ -8,8 +8,15 @@ public class HighScoreMenu : MonoBehaviour
     public Label HighScore; // Link naar het tweede label in de UI
     public Button PlayAgain; // Link naar de knop in de UI
 
+    private Button playAgainButton;
+
     void Start()
     {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+
+        // Zoek de PlayAgain button en het textField op basis van hun naam
+        playAgainButton = root.Q<Button>("PlayAgain");
+        playAgainButton.SetEnabled(false);
         // Controleer of HighScoreManager bestaat
         if (HighScoreManager.Instance != null)
         {
@@ -34,11 +41,7 @@ public class HighScoreMenu : MonoBehaviour
     // Callbackfunctie voor wanneer de PlayAgain knop wordt geklikt
     void OnPlayAgainButtonClicked()
     {
-        // Vraag GameManager om StartGame uit te voeren
-        GameManager.Instance.StartGame();
-
         // Laad de GameScene
         SceneManager.LoadScene("GameScene");
-
     }
 }

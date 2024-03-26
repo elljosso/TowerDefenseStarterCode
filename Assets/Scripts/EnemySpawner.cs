@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Singleton deel
     public static EnemySpawner Get { get; private set; }
     public List<GameObject> Path1 = new List<GameObject>();
     public List<GameObject> Path2 = new List<GameObject>();
     public List<GameObject> Enemies = new List<GameObject>();
 
-
-    private int ufoCounter = 0; // Counter voor het bijhouden van het aantal UFO's
+    private int ufoCounter = 0;
 
     private void Awake()
     {
-        // Singleton-patroon: zorg ervoor dat er slechts één instantie van EnemySpawner is
         if (Get != null && Get != this)
         {
             Destroy(this.gameObject);
@@ -29,59 +26,196 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartWave(int number)
     {
-        // Reset de counter
         ufoCounter = 0;
-
         switch (number)
         {
             case 1:
-                // Start de eerste wave met een interval van 1.5 seconden
                 InvokeRepeating("StartWave1", 1f, 1.5f);
                 break;
-                // Voeg hier andere wave-cases toe en implementeer de bijbehorende StartWave methoden
+            case 2:
+                InvokeRepeating("StartWave2", 1f, 1.5f);
+                break;
+            case 3:
+                InvokeRepeating("StartWave3", 1f, 1.5f);
+                break;
+            case 4:
+                InvokeRepeating("StartWave4", 1f, 1.5f);
+                break;
+            case 5:
+                InvokeRepeating("StartWave5", 1f, 1.5f);
+                break;
         }
     }
 
     private void StartWave1()
     {
-        ufoCounter++; // Verhoog de counter
-
-        // Laat enkele pauzes tussen de UFO's
+        ufoCounter++;
         if (ufoCounter % 6 <= 1)
         {
             return;
         }
 
-        // Laat verschillende UFO's spawnen gedurende de wave
         if (ufoCounter < 30)
         {
-            SpawnEnemy(0, Path.Path1); // Spawn een standaard UFO
+            SpawnEnemy(0, Path.Path1);
         }
         else
         {
-            SpawnEnemy(1, Path.Path1); // Spawn een verbeterde UFO
+            SpawnEnemy(1, Path.Path1);
         }
 
-        // Beëindig de wave na een bepaald aantal UFO's
         if (ufoCounter > 30)
         {
-            CancelInvoke("StartWave1"); // Stop het herhaaldelijk aanroepen van StartWave1
-            GameManager.Instance.EndWave(); // Laat de GameManager weten dat de wave is geëindigd
+            CancelInvoke("StartWave1");
+            GameManager.Instance.EndWave();
+        }
+    }
+
+    private void StartWave2()
+    {
+        ufoCounter++;
+        if (ufoCounter % 6 <= 1)
+        {
+            return;
+        }
+
+        if (ufoCounter < 25)
+        {
+            SpawnEnemy(0, Path.Path1);
+        }
+        else if (ufoCounter < 35)
+        {
+            SpawnEnemy(1, Path.Path1);
+        }
+        else
+        {
+            SpawnEnemy(2, Path.Path1);
+        }
+
+        if (ufoCounter > 35)
+        {
+            CancelInvoke("StartWave2");
+            GameManager.Instance.EndWave();
+        }
+    }
+
+    private void StartWave3()
+    {
+        ufoCounter++;
+        if (ufoCounter % 6 <= 1)
+        {
+            return;
+        }
+
+        if (ufoCounter < 20)
+        {
+            SpawnEnemy(0, Path.Path1);
+        }
+        else if (ufoCounter < 30)
+        {
+            SpawnEnemy(1, Path.Path1);
+        }
+        else if (ufoCounter < 40)
+        {
+            SpawnEnemy(2, Path.Path1);
+        }
+        else
+        {
+            SpawnEnemy(3, Path.Path1);
+        }
+
+        if (ufoCounter > 40)
+        {
+            CancelInvoke("StartWave3");
+            GameManager.Instance.EndWave();
+        }
+    }
+
+    private void StartWave4()
+    {
+        ufoCounter++;
+        if (ufoCounter % 6 <= 1)
+        {
+            return;
+        }
+
+        if (ufoCounter < 15)
+        {
+            SpawnEnemy(0, Path.Path1);
+        }
+        else if (ufoCounter < 25)
+        {
+            SpawnEnemy(1, Path.Path1);
+        }
+        else if (ufoCounter < 35)
+        {
+            SpawnEnemy(2, Path.Path1);
+        }
+        else if (ufoCounter < 45)
+        {
+            SpawnEnemy(3, Path.Path1);
+        }
+        else
+        {
+            SpawnEnemy(4, Path.Path1);
+        }
+
+        if (ufoCounter > 45)
+        {
+            CancelInvoke("StartWave4");
+            GameManager.Instance.EndWave();
+        }
+    }
+
+    private void StartWave5()
+    {
+        ufoCounter++;
+        if (ufoCounter % 6 <= 1)
+        {
+            return;
+        }
+
+        if (ufoCounter < 15)
+        {
+            SpawnEnemy(0, Path.Path1);
+            SpawnEnemy(0, Path.Path2);
+        }
+        else if (ufoCounter < 25)
+        {
+            SpawnEnemy(1, Path.Path1);
+            SpawnEnemy(1, Path.Path2);
+        }
+        else if (ufoCounter < 35)
+        {
+            SpawnEnemy(2, Path.Path1);
+            SpawnEnemy(2, Path.Path2);
+        }
+        else if (ufoCounter < 45)
+        {
+            SpawnEnemy(3, Path.Path1);
+            SpawnEnemy(3, Path.Path2);
+        }
+        else
+        {
+            SpawnEnemy(4, Path.Path1);
+            SpawnEnemy(4, Path.Path2);
+        }
+
+        if (ufoCounter > 45)
+        {
+            CancelInvoke("StartWave5");
+            GameManager.Instance.EndWave();
         }
     }
 
     private void SpawnEnemy(int type, Path path)
     {
-        // Instantieer een nieuwe vijand (UFO)
         var newEnemy = Instantiate(Enemies[type], Path1[0].transform.position, Path1[0].transform.rotation);
-
         var script = newEnemy.GetComponentInParent<UFO>();
-
         if (script != null)
         {
-            // Stel het pad en het doel van de vijand in
             script.SetPath(path);
-            GameObject target = RequestTarget(path, 0); // Begin bij het eerste waypoint
+            GameObject target = RequestTarget(path, 0);
             script.SetTarget(target);
         }
     }

@@ -4,8 +4,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    public AudioSource menuMusic;
-    public AudioSource gameMusic;
+    public GameObject audioSourcePrefab;
+    public AudioClip[] uiSounds;
+    public AudioClip[] towerSounds;
 
     private void Awake()
     {
@@ -20,21 +21,54 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void StartMenuMusic()
+    public void PlayUISound()
     {
-        if (gameMusic.isPlaying)
-            gameMusic.Stop();
+        int index = Random.Range(0, uiSounds.Length);
 
-        if (!menuMusic.isPlaying)
-            menuMusic.Play();
+        // Instantiate an AudioSource GameObject
+        GameObject soundGameObject = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
+        AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+        // Configure and play the sound
+        audioSource.clip = uiSounds[index];
+        audioSource.Play();
+
+        // Destroy the AudioSource GameObject after the clip finishes playing
+        Destroy(soundGameObject, uiSounds[index].length);
     }
 
-    public void StartGameMusic()
+    public void PlayTowerSound(TowerType towerType)
     {
-        if (menuMusic.isPlaying)
-            menuMusic.Stop();
+        int index = 0;
+        switch (towerType)
+        {
+            case TowerType.Archer:
+                index = 0;
+                break;
+            case TowerType.Sword:
+                index = 1;
+                break;
+            case TowerType.Wizard:
+                index = 2;
+                break;
+        }
 
-        if (!gameMusic.isPlaying)
-            gameMusic.Play();
+        if (index < towerSounds.Length)
+        {
+            // Instantiate an AudioSource GameObject
+            GameObject soundGameObject = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
+            AudioSource audioSource = soundGameObject.GetComponent<AudioSource>();
+
+            // Configure and play the sound
+            audioSource.clip = towerSounds[index];
+            audioSource.Play();
+
+            // Destroy the AudioSource GameObject after the clip finishes playing
+            Destroy(soundGameObject, towerSounds[index].length);
+        }
+        else
+        {
+            Debug.LogWarning("Tower sound index out of range!");
+        }
     }
 }
